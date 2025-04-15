@@ -21,7 +21,7 @@ module.exports = {
         lightBluegradient:
           "linear-gradient(136.68deg, #F5FBFF 24.27%, #F1F7FB 99.81%);",
         mediumBlueGradient:
-          "linear-gradient(87.46deg, rgba(83, 135, 241, 0.14) 0%, rgba(123, 115, 252, 0.14) 100%);",
+          "linear-gradient(87.46deg, rgba(83, 135, 241, 1) 0%, rgba(123, 115, 252, 1) 100%);",
         eventLinearBg:
           "linear-gradient(180deg, #EAF1FC -0.35%, #DDE8F9 100.35%)",
         gradientBg1:
@@ -34,7 +34,8 @@ module.exports = {
           "linear-gradient(120.42deg, #152945 -18.21%, #015CDD 106.55%)",
         gradientBorder:
           "linear-gradient(121.15deg, #053EFE 17.83%, #00F3E7 102%)",
-        bgGradientBox: "linear-gradient(180deg, #6A57F6 0%, #5B47FF 104.94%);",
+        bgGradientBox:
+          "linear-gradient(87.46deg, rgba(83, 135, 241, 0.14) 0%, rgba(123, 115, 252, 0.14) 100%);",
         blueGradient1:
           "linear-gradient(87.91deg, #4F88F0 -4.68%, #7E71FC 104.83%);",
       },
@@ -63,8 +64,12 @@ module.exports = {
         secondaryShade4: "rgba(72, 74, 78, 0.5)",
         secondaryShade1: "rgba(77, 55, 245,0.8)",
         primaryColor: "#02163D",
+        slateColor: "#45556C",
+        lightBlue: "#F1F5F9",
         lightGray: "#F5F5F5",
         lightGray2: "#f9f9f9",
+        lightGray3: "#E9E9E9",
+        lightGray4: "#E5E5E5",
         blueColor: "#1084D8",
         brightCyan: "#2FE9DB",
         secondary: "#293FCC",
@@ -83,7 +88,6 @@ module.exports = {
         lightGray8: "#D2D8E3",
         cyanBlue: "#042567",
         lightblue: "rgba(4, 37, 103,0.3)",
-        slatecolor: "rgb(34 34 34)",
         lightBlue2: "#edf7fe",
         lightBlue4: "#C3E3FA",
         textgray: "#526282",

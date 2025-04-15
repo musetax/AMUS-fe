@@ -5,6 +5,10 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
   Navbar,
   NavbarBrand,
   NavbarContent,
@@ -12,9 +16,10 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
+  User,
 } from "@heroui/react";
-import { MdClose } from "react-icons/md";
-import { MenuIcon } from "lucide-react";
+import { MdClose, MdLogout } from "react-icons/md";
+import { ChevronDown, MenuIcon } from "lucide-react";
 import Logo from "public/images/logo/main-logo.svg";
 const HeaderBar: React.FC<any> = () => {
   const router = useRouter();
@@ -37,7 +42,7 @@ const HeaderBar: React.FC<any> = () => {
             }}
           >
             {/* Brand and toggle */}
-            <NavbarBrand>
+            <div>
               <Link href="/">
                 <Image
                   src={Logo}
@@ -47,7 +52,7 @@ const HeaderBar: React.FC<any> = () => {
                   className="w-[120px] min-w-[120px] dark:hidden"
                 />
               </Link>
-            </NavbarBrand>
+            </div>
 
             <NavbarContent className="lg:hidden" justify="end">
               <NavbarMenuToggle
@@ -88,6 +93,33 @@ const HeaderBar: React.FC<any> = () => {
                 <Link href="#">Support</Link>
               </NavbarMenuItem>
             </NavbarMenu>
+
+            <div className="flex items-center gap-4">
+              <Dropdown
+                placement="bottom-start"
+                className="dark:bg-lightBlue bg-white dark:btn-hover"
+              >
+                <DropdownTrigger>
+                  <User
+                    as="button"
+                    className="border-none user_img flex items-center"
+                    name={
+                      <span className="text-base font-normal break-all flex items-center gap-2 text-primaryColor">
+                        Muse
+                        <ChevronDown />
+                      </span>
+                    }
+                  />
+                </DropdownTrigger>
+                <DropdownMenu aria-label="User Actions" variant="flat">
+                  <DropdownItem key="logout" color="danger">
+                    <span className="flex items-center gap-2.5">
+                      <MdLogout className="text-xl" /> Log Out
+                    </span>
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </div>
           </Navbar>
         </div>
       </div>
