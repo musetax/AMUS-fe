@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
+
 const generalSans = localFont({
   src: "../components/assets/fonts/fonts/GeneralSans-Regular.woff",
   variable: "--font-general-sans",
@@ -18,8 +19,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+   
     <html lang="en">
       <body className={`${generalSans.variable}  antialiased`}>{children}</body>
     </html>
+ 
   );
 }

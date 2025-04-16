@@ -3,16 +3,15 @@
 import { Thread } from "@/components/chatbot/assistant-ui/thread";
 import { ThreadList } from "@/components/chatbot/assistant-ui/thread-list";
 import TaxDetails from "@/components/chatbot/taxDetails";
-import { AssistantRuntimeProvider } from "@assistant-ui/react";
+import { AssistantRuntimeProvider, useLocalRuntime } from "@assistant-ui/react";
 import { useChatRuntime } from "@assistant-ui/react-ai-sdk";
 import { useState } from "react";
+import { MyModelAdapter } from "./MyRuntimeProvider";
 
 export const Assistant = () => {
   const [activeTab, setActiveTab] = useState<"tax" | "learn">("tax");
   
-  const runtime = useChatRuntime({
-    api: activeTab?"/api/chat":'api/learn',
-  });
+  const runtime = useLocalRuntime(MyModelAdapter);
 
   return (
     <AssistantRuntimeProvider runtime={runtime}>

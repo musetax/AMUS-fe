@@ -21,6 +21,6 @@ export async function POST(req: Request) {
       ]),
     ),
   });
-
+console.log(result.toDataStreamResponse(),'vvvvresult.toDataStreamResponse();')
   return result.toDataStreamResponse();
 }

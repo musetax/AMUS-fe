@@ -5,7 +5,7 @@ import {
   MessagePrimitive,
   ThreadPrimitive,
 } from "@assistant-ui/react";
-import { useState, type FC } from "react";
+import { useEffect, useState, type FC } from "react";
 import {
   ArrowDownIcon,
   CheckIcon,
@@ -26,7 +26,154 @@ import { Button } from "@/components/chatbot/ui/button";
 import { TooltipIconButton } from "./tooltip-icon-button";
 import { MarkdownText } from "./markdown-text";
 
+const initialState={
+  age: "",
+  payroll_id: '23',
+  blind: false,
+  other_credit: 0,
+  deductions: {
+    charitable_donations: 0,
+    home_mortgage_interest: 0,
+    ira_contribution: 0,
+    medical_expenses: 0,
+    other_deductions: 0,
+    state_or_local_tax: 0,
+    student_loan_interest: 0,
+  },
+  selectedDeductions: [], // Initialize empty
+  any_dependents: null,
+  // dependents: [
+  //   // {
+  //   //   age: "",
+  //   //   is_disabled: false,
+  //   //   is_living_together: false,
+  //   //   is_student: false,
+  //   // },
+  // ],
+  filing_status: "",
+  four_pay_cycle: false,
+  incomes: {
+    dividend_income: null,
+    interest_income: null,
+    retirement_income: null,
+    self_employment_income: null,
+    unemployment_income: null,
+    yearly_salary: [],
+  },
+  left_job: false,
+  left_spouse_job: null,
+  prior_job_value: [
+    {
+      salary: null,
+      withholding: null,
+    },
+  ],
+  self_jobs: [
+    {
+      type: "",
+      yearly_salary: null,
+    
+      pay_frequency: "",
+      withholding_on_last_paycheck: null,
+      original_withholding_ytd: null,
+    },
+  ],
+  more_than_one_job: false,
+  pay_frequency: [],
+ 
+  take_standard_deduction: false,
+  otherCredits: null,
+  // total_withholding_ytd: 0,
+  original_withholding_ytd: [],
+  withholding_on_last_paycheck: [],
+  goal_type: "",
+  goal_amount: null,
+  most_recent_pay_date_dt: "",
+  start_pay_date_dt: "",
+  tax_calculation_id: "",
+  tax_token_value: "",
+   refresh_token_value: "",
+  set_refund_value: null,
+  set_tax_cal: "",
+  constant_boost: 0,
+  file_spouse: null,
+  head_household: null,
+  spouse_age: "",
+  spouseJobCount: null,
+  JobCount: null,
+  isCheck:false,
+ 
+}
+
 export const Thread: any = ({activeTab, setActiveTab}:any) => {
+  const [modalType, setModalType] = useState<"login" | "taxdata">("login");
+  const [message, setMessage] = useState<string>("");
+
+  const [user, setUser] = useState<any>({});
+  const [sessionId, setSessionId] = useState<any>("");
+  const [messages, setMessages] = useState<any[]>([]);
+  const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [formData, setFormData] = useState(initialState);
+  // const sendMessage = async () => {
+  //   if (!message.trim()) return;
+
+  //   setMessages((prev: any) => [...prev, generateMessage("user", message)]);
+  //   setMessage("");
+  //   setLoading(true);
+
+  //   try {
+  //     if (activeTab === "learn") {
+  //       const data = await sendQuery(message);
+
+  //       if (data) {
+  //         const responseMessage = data?.response;
+
+  //         setMessages((prev: any) => [
+  //           ...prev,
+  //           generateMessage("system", responseMessage),
+  //         ]);
+  //       }
+  //     } else {
+  //       const data = await sendMessagetax(message, sessionId);
+
+  //       if (data) {
+  //         const responseMessage = data?.response;
+  //         setShowModal(false);
+  //         setMessages((prev: any) => [
+  //           ...prev,
+  //           generateMessage("system", responseMessage),
+  //         ]);
+  //         setShowModal(false);
+  //         if (data?.recommendation_question) {
+  //           setMessages((prev: any) => [
+  //             ...prev,
+  //             generateMessage("system", data?.recommendation_question),
+  //           ]);
+  //           // generateMessage("system", data.recommendation_question),
+  //         }
+  //       }
+  //     }
+  //   } catch (error: any) {
+  //     console.error("Error sending query:", error);
+  //     setMessages((prev: any) => [
+  //       ...prev,
+  //       generateMessage(
+  //         "system",
+  //         "Sorry, something went wrong. Please try again later."
+  //       ),
+  //     ]);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  useEffect(() => {
+    setShowModal(true);
+    setModalType("login");
+  }, [1]);
+
+
   return (
     <>
       <div>
@@ -105,7 +252,7 @@ const ThreadWelcome: FC = () => {
     <ThreadPrimitive.Empty>
       <div className="flex w-full max-w-[var(--thread-max-width)] flex-grow flex-col">
         <div className="flex w-full flex-grow flex-col items-center justify-center">
-          <p className="mt-4 font-medium">How can I help you today?</p>
+          <p className="mt-4 font-medium">Stuck with Tax. No Worries Uncle Sam is Here?</p>
         </div>
         <ThreadWelcomeSuggestions />
       </div>
@@ -123,7 +270,7 @@ const ThreadWelcomeSuggestions: FC = () => {
         autoSend
       >
         <span className="line-clamp-2 text-ellipsis text-sm font-semibold">
-          What is the weather in Tokyo?
+          How can i claim my tax refund?
         </span>
       </ThreadPrimitive.Suggestion>
       <ThreadPrimitive.Suggestion
@@ -133,7 +280,7 @@ const ThreadWelcomeSuggestions: FC = () => {
         autoSend
       >
         <span className="line-clamp-2 text-ellipsis text-sm font-semibold">
-          What is assistant-ui?
+          What is W4 tax?
         </span>
       </ThreadPrimitive.Suggestion>
     </div>
