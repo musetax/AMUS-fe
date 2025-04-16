@@ -5,14 +5,18 @@ import {
   MessagePrimitive,
   ThreadPrimitive,
 } from "@assistant-ui/react";
-import type { FC } from "react";
+import { useState, type FC } from "react";
 import {
   ArrowDownIcon,
   CheckIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   CopyIcon,
+  Mic,
+  Paperclip,
   PencilIcon,
+  Percent,
+  PieChart,
   RefreshCwIcon,
   SendHorizontalIcon,
 } from "lucide-react";
@@ -23,34 +27,63 @@ import { TooltipIconButton } from "./tooltip-icon-button";
 import { MarkdownText } from "./markdown-text";
 
 export const Thread: FC = () => {
+  const [activeTab, setActiveTab] = useState<"tax" | "learn">("tax");
   return (
-    <ThreadPrimitive.Root
-      className="bg-background box-border flex h-full flex-col overflow-hidden"
-      style={{
-        ["--thread-max-width" as string]: "42rem",
-      }}
-    >
-      <ThreadPrimitive.Viewport className="flex h-full flex-col items-center overflow-y-scroll scroll-smooth bg-inherit px-4 pt-8">
-        <ThreadWelcome />
-
-        <ThreadPrimitive.Messages
-          components={{
-            UserMessage: UserMessage,
-            EditComposer: EditComposer,
-            AssistantMessage: AssistantMessage,
-          }}
-        />
-
-        <ThreadPrimitive.If empty={false}>
-          <div className="min-h-8 flex-grow" />
-        </ThreadPrimitive.If>
-
-        <div className="sticky bottom-0 mt-3 flex w-full max-w-[var(--thread-max-width)] flex-col items-center justify-end rounded-t-lg bg-inherit pb-4">
-          <ThreadScrollToBottom />
-          <Composer />
+    <>
+      <div>
+        <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center space-x-4 mb-10 border border-lightGray7 rounded-full p-2">
+            <button
+              onClick={() => setActiveTab("tax")}
+              className={`px-4 py-2  rounded-full text-lg font-medium flex items-center justify-center gap-2  transition-all duration-200 ${
+                activeTab === "tax"
+                  ? "bg-mediumBlueGradient text-white"
+                  : "text-textgray "
+              }`}
+            >
+              <PieChart /> Tax Calculation
+            </button>
+            <button
+              onClick={() => setActiveTab("learn")}
+              className={`px-5 py-2  rounded-full text-lg font-medium flex items-center justify-center gap-2 transition-all duration-200 ${
+                activeTab === "learn"
+                  ? "bg-mediumBlueGradient text-white"
+                  : "text-textgray"
+              }`}
+            >
+              <Percent /> Learn About Tax
+            </button>
+          </div>
         </div>
-      </ThreadPrimitive.Viewport>
-    </ThreadPrimitive.Root>
+        <ThreadPrimitive.Root
+          className="bg-background box-border flex flex-col overflow-hidden"
+          style={{
+            ["--thread-max-width" as string]: "42rem",
+          }}
+        >
+          <ThreadPrimitive.Viewport className="flex h-[calc(100vh-120px)] flex-col items-center chat-scroll overflow-y-scroll scroll-smooth bg-inherit px-4 pt-8">
+            <ThreadWelcome />
+
+            <ThreadPrimitive.Messages
+              components={{
+                UserMessage: UserMessage,
+                EditComposer: EditComposer,
+                AssistantMessage: AssistantMessage,
+              }}
+            />
+
+            <ThreadPrimitive.If empty={false}>
+              <div className="min-h-8 flex-grow" />
+            </ThreadPrimitive.If>
+
+            <div className="sticky bottom-0 mt-3 flex w-full max-w-[var(--thread-max-width)] flex-col items-center justify-end rounded-t-lg bg-inherit pb-4">
+              <ThreadScrollToBottom />
+              <Composer />
+            </div>
+          </ThreadPrimitive.Viewport>
+        </ThreadPrimitive.Root>
+      </div>
+    </>
   );
 };
 
@@ -110,7 +143,7 @@ const ThreadWelcomeSuggestions: FC = () => {
 
 const Composer: FC = () => {
   return (
-    <ComposerPrimitive.Root className="focus-within:border-ring/20 flex w-full flex-wrap items-end rounded-lg border bg-inherit px-2.5 shadow-sm transition-colors ease-in">
+    <ComposerPrimitive.Root className="focus-within:border-ring/20 flex w-full flex-wrap items-end rounded-lg border bg-inherit px-2.5 shadow-sm transition-colors ease-in gap-2">
       <ComposerPrimitive.Input
         rows={1}
         autoFocus
@@ -126,11 +159,25 @@ const ComposerAction: FC = () => {
   return (
     <>
       <ThreadPrimitive.If running={false}>
+        <TooltipIconButton
+          tooltip="Link"
+          variant="default"
+          className="my-2.5 size-8 p-2 bg-transparent border border-lightGray4 rounded-full transition-opacity ease-in"
+        >
+          <Paperclip className="text-textgray" />
+        </TooltipIconButton>
+        <TooltipIconButton
+          tooltip="Voice"
+          variant="default"
+          className="my-2.5 size-8 p-2 bg-transparent border border-lightGray4 rounded-full transition-opacity ease-in"
+        >
+          <Mic className="text-textgray" />
+        </TooltipIconButton>
         <ComposerPrimitive.Send asChild>
           <TooltipIconButton
             tooltip="Send"
             variant="default"
-            className="my-2.5 size-8 p-2 transition-opacity ease-in"
+            className="my-2.5 size-8 p-2 bg-mediumBlueGradient rounded-full transition-opacity ease-in"
           >
             <SendHorizontalIcon />
           </TooltipIconButton>
@@ -156,7 +203,7 @@ const UserMessage: FC = () => {
     <MessagePrimitive.Root className="grid auto-rows-auto grid-cols-[minmax(72px,1fr)_auto] gap-y-2 [&:where(>*)]:col-start-2 w-full max-w-[var(--thread-max-width)] py-4">
       <UserActionBar />
 
-      <div className="bg-muted text-foreground max-w-[calc(var(--thread-max-width)*0.8)] break-words rounded-3xl px-5 py-2.5 col-start-2 row-start-2">
+      <div className="bg-lightBlue text-slateColor max-w-[calc(var(--thread-max-width)*0.8)] break-words rounded-3xl px-5 py-2.5 col-start-2 row-start-2">
         <MessagePrimitive.Content />
       </div>
 
