@@ -26,8 +26,7 @@ import { Button } from "@/components/chatbot/ui/button";
 import { TooltipIconButton } from "./tooltip-icon-button";
 import { MarkdownText } from "./markdown-text";
 
-export const Thread: FC = () => {
-  const [activeTab, setActiveTab] = useState<"tax" | "learn">("tax");
+export const Thread: any = ({activeTab, setActiveTab}:any) => {
   return (
     <>
       <div>
