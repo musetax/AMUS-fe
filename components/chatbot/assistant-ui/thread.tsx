@@ -280,7 +280,7 @@ const ThreadWelcomeSuggestions: FC = () => {
         autoSend
       >
         <span className="line-clamp-2 text-ellipsis text-sm font-semibold">
-          What is W4 tax?
+          What is W4 Form?
         </span>
       </ThreadPrimitive.Suggestion>
     </div>
