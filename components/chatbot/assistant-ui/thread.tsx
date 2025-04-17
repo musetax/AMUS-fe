@@ -252,7 +252,7 @@ const ThreadWelcome: FC = () => {
     <ThreadPrimitive.Empty>
       <div className="flex w-full max-w-[var(--thread-max-width)] flex-grow flex-col">
         <div className="flex w-full flex-grow flex-col items-center justify-center">
-          <p className="mt-4 font-medium">Stuck with Tax. No Worries Uncle Sam is Here?</p>
+          <p className="mt-4 font-medium">Stuck with Taxes. No Worries Uncle Sam is Here?</p>
         </div>
         <ThreadWelcomeSuggestions />
       </div>
