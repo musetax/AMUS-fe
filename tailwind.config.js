@@ -90,6 +90,7 @@ module.exports = {
         lightblue: "rgba(4, 37, 103,0.3)",
         lightBlue2: "#edf7fe",
         lightBlue4: "#C3E3FA",
+        lightBlue5: "#E0E0F9",
         textgray: "#526282",
         purpuleColor: "#4D37F5",
         mediumGray: "#E6EEFB",

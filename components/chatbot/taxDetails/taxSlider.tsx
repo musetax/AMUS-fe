@@ -61,8 +61,7 @@ const PaycheckSlider: React.FC<PaycheckSliderProps> = ({
             min={min}
             max={max}
             value={fixboost}
-            onChange={handleChange} // Updates UI while sliding
-            onChangeComplete={handleAfterChange} // Saves state when released
+            disabled
             trackStyle={{ backgroundColor: "#48297C" }}
             handleStyle={{ borderColor: "#48297C" }}
           />
